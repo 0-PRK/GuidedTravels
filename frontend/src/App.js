@@ -13,6 +13,7 @@ import { Register } from "./Components/Register";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProfileScreen from "./Components/ProfileScreen";
+import { Provider } from "react-redux";
 
 function App() {
   const [mode, setMode] = useState("light"); //whether dark mode is enabled or not
@@ -41,14 +42,17 @@ function App() {
     <>
       <div>
         <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
+        <Provider store={{Home}}>
+
         <Router>
           {currentForm === "home" ? (
             <Navbar1 mode={mode} toggleMode={toggleMode} />
-          ) : (
+            ) : (
             <Navbar2 mode={mode} toggleMode={toggleMode} />
-          )}
+            )}
 
           <Routes>
+
             <Route path="/" element={<Home />} />
             <Route path="/Home" element={<Home />} />
             <Route
@@ -60,6 +64,7 @@ function App() {
             <Route path="/ProfileScreen" element={<ProfileScreen />} />
           </Routes>
         </Router>
+        </Provider>
       </div>
     </>
   );

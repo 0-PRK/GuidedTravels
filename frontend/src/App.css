@@ -102,6 +102,16 @@
 
 }
 
+.bg5{
+  background-image:url(./Components/images/h.jpg);
+  width: 1530px;
+  height: 795px;
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  display: flex;
+}
+
 
 .align{
   text-align: center;
@@ -207,6 +217,18 @@
   font-family :fjalla;
 }
 
+.alignCenter{
+  align-items: center;
+  text-align: center;
+}
+
+
+.aligncenter1{
+  align-items: center;
+  text-align: center;
+}
+
+
 .alignLeft{
   align-items: left;
   justify-content: left;
@@ -234,11 +256,27 @@
   margin-left:auto;
   background-color:#6a6a6b;
 }
-
 .right{
   justify-content: right;
   align-items: right;
   text-align: right;
+
+}
+
+.rightNav{
+  justify-content: right;
+  align-items: right;
+  text-align: right;
+  float: right;
+
+}
+
+.rightCross{
+  justify-content: right;
+  align-items: right;
+  text-align: right;
+  display: flex;
+  font-size: calc(20px + 1vmin);
 }
 
 .left{
@@ -260,7 +298,12 @@
   align-items: center;
   height: 10vh; 
 }
-
+.center2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:795px;
+}
 .foot{
   background-color: #E4E4E4;
   font-family :nunito;
@@ -278,12 +321,21 @@
   transform: translateY(50%);
 
 }
+.contact-short1{
+  max-width:40vw;
+  margin: auto;
+  padding: 5rem 10rem ;
+  background-color: #5D4C72;
+  border-radius: 1rem;
+  font-family: nunito;
+  color:#E4E4E4 ;
+  transform: translateY(-50%);
+
+}
 
 .column {
   flex: 25%;
   height: 200px;
-  padding: 10px;
-  margin: 5px;
   text-align: left;
 }
 .container1{
@@ -300,6 +352,20 @@
 
 .quicksand{
   font-family: quicksand;
+}
+
+.quicksand18{
+  font-family: quicksand;
+  font-size: calc(5px + 2vmin);
+}
+.quicksand13{
+  font-family: quicksand;
+  font-size: calc(3px + 2vmin);
+}
+.quicksand20{
+  font-family: quicksand;
+  font-size: calc(30px + 2vmin);
+  
 }
 
 .auth-form-container, .login-form, .register-form{
@@ -348,6 +414,55 @@
   text-decoration : underline ;
 }
 
+.pop{
+height:600px;
+width:30%;
+left:50%;
+top:50%;
+border-radius:10px;
+box-shadow: rgba(100,100,111,0.2) 0px 7px 29px 0px;
+-webkit-transfrom: translate(-50%, -50%);
+transform:translate(-50%, -50%);
+background-color:#fff;
+position:absolute;
+display:flex;
+align-items: center;
+justify-content:center;
+}
+ .pop1{
+  height:670px;
+  width:20px;
+  top:7%;
+  align-items: center;
+  justify-content:center;
+  display:flex;
+ }
+ .pop2{
+  height:720px;
+  width:2px;
+  top:6%;
+  align-items: center;
+  justify-content:center;
+  display:flex;
+ }
+ .pop3{
+  height:600px;
+  width:20px;
+  top:7%;
+  align-items: center;
+  justify-content:center;
+  display:flex;
+ }
+
+ .email{
+  font-family :quicksand;
+  font-size: calc(8px + 2vmin);
+  background-color: #ffffff;
+  box-shadow: rgba(100,100,111,0.2) 0px 0px 5px 0px;
+  border-radius: 7px ;
+  border-color: #909090 ;
+  width:500px;
+ }
 .carousel-container {
   position: fixed;
   bottom: 0;
@@ -356,6 +471,108 @@
 
 
 
+.but{
+  width: 200px;
+  height: 50px;
+  justify-content:center;
+  align-items: center;
+  display:flex;
+  font-size: calc(20px + 2vmin);
+  font-family :quicksand;
+}
+.cross{
+  align-items: right;
+  justify-content: right;
+  text-align: right;
+  margin-right: 0;
+  display: flex;
+  font-size: calc(25px + 1vmin);
+  color:#909090;
+  
+}
+.cross1{
+  align-items: right;
+  justify-content: right;
+  text-align: right;
+  display: flex;
+  font-size: calc(25px + 1vmin);
+  
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  grid-gap: 10px; 
+}
+
+.containe{
+  border: 1px solid black ;
+  
+}
+
+.column1 {
+  background-color: #f2f2f2;
+ min-width:300px;
+
+}
+
+.column2 {
+  background-color: #f2f2f2;
+  min-width: 1100px;
+  min-height: 100%;;
+
+}
+
+.column3 {
+  background-color: #f2f2f2;
+max-width: 600px;
+  min-width: 600px;
+  max-height: 800px;
+
+}
+
+/* .column4 {
+  background-color: #f2f2f2;
+  max-width: 900px;
+  min-width: 900px;
+  max-height: 400px;
+  min-height: 400px;
+  outline: red dashed 1px;
+
+} */
+
+
+.grid-container1 {
+  display: flex;
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust the column width as needed */
+  gap: 20px; /* Adjust the gap between columns as needed */
+}
+
+.columna {
+  min-width: 0; /* Ensure the column can shrink to 0 width */
+  min-height: 820px;
+}
+
+.fit{
+  padding-top: 10px;
+}
 
 
 
+
+.SettingsItem{
+  margin-top: 50%;
+}
+
+.fixx{
+  max-height: 400px;
+}
+
+.small
+{
+  max-width: 10px;
+}

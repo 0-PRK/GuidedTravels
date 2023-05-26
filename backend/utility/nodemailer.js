@@ -1,3 +1,4 @@
+try{
 "use strict";
 const nodemailer = require("nodemailer");
 
@@ -13,8 +14,8 @@ module.exports.sendMail=async function sendMail(str,data) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'prk.raj.888@gmail.com', // generated ethereal user
-      pass: 'Iwillnottellu4', // generated ethereal password
+      user: 'guidedtravels.spam@gmail.com', // generated ethereal user
+      pass: 'GuidedTravels2023', // generated ethereal password
     },
   });
 
@@ -42,7 +43,7 @@ module.exports.sendMail=async function sendMail(str,data) {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '" Guided Travels 👻" <prk.raj.888@gmail.com>', // sender address
+    from: '" Guided Travels 👻" <guidedtravels.spam@gmail.com>', // sender address
     to: data.email, // list of receivers
     subject: Osubject, // Subject line
     // text: "Hello world?", // plain text body
@@ -52,6 +53,12 @@ module.exports.sendMail=async function sendMail(str,data) {
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
+}
+
+}
+
+catch(error){
+  console.log(error);
 }
 
 

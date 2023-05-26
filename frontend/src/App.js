@@ -1,13 +1,20 @@
 // import logo from './logo.svg';
 import { useState } from "react";
+import React from "react";
 import "./App.css";
 import About from "./Components/About";
 import Navbar1 from "./Components/Navbar";
 import Navbar2 from "./Components/afterLoginNavbar";
 import Home from "./Components/Home";
+import Carousel1 from "./Components/Carousel";
+//import ProfileScreen from "./Components/ProfileScreen";
+import Loginhome from "./Components/LoginHome";
 import LoginScreen from "./Components/LoginScreen";
 import { Toaster } from "react-hot-toast";
+<<<<<<< HEAD
 //import Map from './Components/map'; 
+=======
+>>>>>>> 9c3795c73ff6fc19792f91f745a1a56fa7e51b5a
 import Afterlogin from "./Components/afterlogin";
 //import Carousel1 from "./Components/Carousel";
 // import axios from 'axios';
@@ -18,24 +25,25 @@ import { Register } from "./Components/Register";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-// import ProfileScreen from "./Components/ProfileScreen";
 
 function App() {
 
   const apiKey = 'AIzaSyDnqzvG0A1JmiMvayhbt_T_5IXtRO0DiHQ';
   const [mode, setMode] = useState("light"); //whether dark mode is enabled or not
   const [currentForm, setCurrentForm] = useState(
-    localStorage.getItem("isLoggedIn")
-      ? localStorage.getItem("isLoggedIn")
+    localStorage.getItem("accesstoken")
+      ? localStorage.getItem("accessToken")
       : "home"
   );
   
   const toggleForm = (forName) => {
-    setCurrentForm(forName);
-    localStorage.setItem("isLoggedIn", forName);
-    // When user logs out
-    // setCurrentForm("home");
-    // localStorage.removeItem("isLoggedIn");
+    if(forName==="home"){
+     setCurrentForm("home");
+     localStorage.removeItem("accessToken");}
+     else{
+      setCurrentForm(forName);
+      localStorage.setItem("accessToken", forName);
+     }
   };
   const toggleMode = () => {
     if (mode === "light") {
@@ -46,41 +54,62 @@ function App() {
       document.body.style.backgroundColor = "white";
     }
   };
+  const [result, setResult] = useState(null)
+  const [modal,setmodal] = useState(false)
+  const [data,setData] = useState(null)
   return (
     <>
       <div>
         <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
         <Router>
           {currentForm === "home" ? (
-            <Navbar1 mode={mode} toggleMode={toggleMode} />
+            <Navbar1 mode={mode} toggleMode={toggleMode} setmodal={setmodal} />
           ) : (
-            <Navbar2 mode={mode} toggleMode={toggleMode} />
+            <Navbar2 mode={mode} onFormSwitch={toggleForm} toggleMode={toggleMode} />
           )}
 
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Home" element={<Home />} />
+
+          { localStorage.getItem("accessToken") ?(
+            <Route path="/" element={<Loginhome />} />
+          ): (
+            <Route path="/" element={<Home modal={modal} setmodal={setmodal}/>} />
+          ) }
+            
+            <Route path="/Home" element={<Home modal={modal} setmodal={setmodal}/>} />
+            <Route path="/LoginHome/plans/plan/:id" element={<Loginhome data={data} setData={setData} result={result} setResult={setResult}/>} />
             <Route
               path="/Login"
-              element={<Login onFormSwitch={toggleForm} />}
+              element={<Login onFormSwitch={toggleForm} modal={modal} setmodal={setmodal} />}
             />
             <Route path="/About" element={<About />} />
             <Route path="/Register" element={<Register />} />
+            {/* <Route path="/Profile" element={<afterlogin />} /> */}
             <Route path="/LoginScreen" element={<LoginScreen />} />
-            <Route path="/Afterlogin" element={<afterlogin/>} />
+            <Route path="/Afterlogin" element={<Afterlogin/>} />
             {/* <Route path="/ProfileScreen" element={<ProfileScreen />} /> */}
           </Routes>
         </Router>
       </div>
 
+<<<<<<< HEAD
       {/* <div>
         <Map apiKey={apiKey} /> 
       </div> */}
+=======
+     
+>>>>>>> 9c3795c73ff6fc19792f91f745a1a56fa7e51b5a
 
-      <div>
-        <Afterlogin/>
+      {/* <div>
+        <ProfileScreen/>
+      </div> */}
+
+      {/*<div>
+        <h1>POPULAR DESTINATIONSs</h1>
+        <Carousel1/>
       </div>
-
+        <Afterlogin/> */} 
+      
       {/* <div>
         <h1>POPULAR DESTINATIONS</h1>
         <Carousel1/>

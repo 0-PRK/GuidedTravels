@@ -7,7 +7,7 @@ import Navbar2 from "./Components/afterLoginNavbar";
 import Home from "./Components/Home";
 import LoginScreen from "./Components/LoginScreen";
 import { Toaster } from "react-hot-toast";
-import Map from './Components/map'; 
+//import Map from './Components/map'; 
 import Afterlogin from "./Components/afterlogin";
 //import Carousel1 from "./Components/Carousel";
 // import axios from 'axios';
@@ -73,9 +73,9 @@ function App() {
         </Router>
       </div>
 
-      <div>
+      {/* <div>
         <Map apiKey={apiKey} /> 
-      </div>
+      </div> */}
 
       <div>
         <Afterlogin/>

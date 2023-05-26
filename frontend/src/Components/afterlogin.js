@@ -1,6 +1,7 @@
 
 import React, { useState , useEffect } from "react";
 import Carousel1 from "./Carousel";
+import Map from "./map"
 import "./afterlogin.css" 
 
 
@@ -63,6 +64,23 @@ export default function Afterlogin() {
      <h1>POPULAR DESTINATIONS</h1>
         <Carousel1/> 
     </div>
+
+    <div>
+      <section>
+        <div className="containe">
+          <div className="cards">
+            <div className= "card">
+              <h3>Please put map here</h3>
+            </div>
+          </div>
+          
+        </div>
+
+      </section>
+      
+    </div>
+
+    
 
   </>
  

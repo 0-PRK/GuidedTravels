@@ -1,6 +1,7 @@
 import React, { useState , useEffect } from "react";
 import Carousel1 from "./Carousel";
-import Map from "./map"
+import Card1 from "./cards";
+//import Map from "./map"
 import "./afterlogin.css" 
 import {  Box,  Flex,  SkeletonText} from "@chakra-ui/react";
 import {  useJsApiLoader,  GoogleMap,  Marker,} from "@react-google-maps/api";
@@ -107,6 +108,10 @@ export default function Afterlogin(props) {
     <div>
      <h1>POPULAR DESTINATIONS</h1>
         <Carousel1/> 
+    </div>
+
+    <div>
+      <Card1/>
     </div>
 
     <div>

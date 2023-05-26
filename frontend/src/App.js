@@ -11,10 +11,7 @@ import Carousel1 from "./Components/Carousel";
 import Loginhome from "./Components/LoginHome";
 import LoginScreen from "./Components/LoginScreen";
 import { Toaster } from "react-hot-toast";
-<<<<<<< HEAD
 //import Map from './Components/map'; 
-=======
->>>>>>> 9c3795c73ff6fc19792f91f745a1a56fa7e51b5a
 import Afterlogin from "./Components/afterlogin";
 //import Carousel1 from "./Components/Carousel";
 // import axios from 'axios';
@@ -92,13 +89,7 @@ function App() {
         </Router>
       </div>
 
-<<<<<<< HEAD
-      {/* <div>
-        <Map apiKey={apiKey} /> 
-      </div> */}
-=======
      
->>>>>>> 9c3795c73ff6fc19792f91f745a1a56fa7e51b5a
 
       {/* <div>
         <ProfileScreen/>

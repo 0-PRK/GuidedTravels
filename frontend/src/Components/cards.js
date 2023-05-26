@@ -14,7 +14,7 @@ function Card1() {
                             <Card.Body>
                                 <Card.Title>Card Title</Card.Title>
                                 <Card.Text>
-                                    Some q uick example text to build on the card title and make up the
+                                    Some quick example text to build on the card title and make up the
                                     bulk of the card's content.
                                 </Card.Text>
                                 <Button variant="primary">Read more</Button>
@@ -22,38 +22,59 @@ function Card1() {
                         </div>
 
                     </div>
+
+                    <div className="col-md-3">
+                        <div className="card">
+                            <Card.Img variant="top" src="holder.js/100px180" />
+                            <Card.Body>
+                                <Card.Title>Card Title</Card.Title>
+                                <Card.Text>
+                                    Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.
+                                </Card.Text>
+                                <Button variant="primary">Read more</Button>
+                            </Card.Body>
+                        </div>
+
+                    </div>
+
+                    <div className="col-md-3">
+                        <div className="card">
+                            <Card.Img variant="top" src="holder.js/100px180" />
+                            <Card.Body>
+                                <Card.Title>Card Title</Card.Title>
+                                <Card.Text>
+                                    Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.
+                                </Card.Text>
+                                <Button variant="primary">Read more</Button>
+                            </Card.Body>
+                        </div>
+                        
+
+                    </div>
+                    <div className="col-md-3">
+                        <div className="card">
+                            <Card.Img variant="top" src="holder.js/100px180" />
+                            <Card.Body>
+                                <Card.Title>Card Title</Card.Title>
+                                <Card.Text>
+                                    Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.
+                                </Card.Text>
+                                <Button variant="primary">Read more</Button>
+                            </Card.Body>
+                        </div>
+                        
+
+                    </div>
+                    
                 </div>
             </div>
 
-            <div className="col-md-2">
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                        <Button variant="primary">Read more</Button>
-                    </Card.Body>
-                </Card>
+            
 
-            </div>
-
-            <div className="col-md-3">
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                        <Button variant="primary">Read more</Button>
-                    </Card.Body>
-                </Card>
-
-            </div>
+            
         </>
 
 

@@ -5,51 +5,20 @@ import { Box, Flex, SkeletonText } from "@chakra-ui/react";
 import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
 import img from "./images/defaultuser.png";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useFetcher, useParams } from "react-router-dom";
 import Carousel1 from "./Carousel";
 import Card1 from "./cards";
+import UseFetch from "../Hooks/UseFetch";
 
 export default function Afterlogin(props) {
   // const user = {
 
-  const [user, setUser] = useState("");
-  //   profileImage: "path/to/profile-image.jpg",
-  //   fullName: "John Doe",
-  //   userName: "johndoe",
-  // };
+  // const [user, setUser] = useState("");
   const center = { lat: 27.7172, lng: 85.324 };
   const [imgSrc, setImgSrc] = useState(img);
-
   const { id } = useParams();
-  const token = localStorage.getItem("accessToken");
+  const {user} = UseFetch(`http://localhost:4000/user/userProfile/${id}`)
 
-  const headers = {
-    Authorization: token,
-    "Content-Type": "application/json",
-  };
-  // fetching image andname from database
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:4000/user/userProfile/${id}`,
-          { headers }
-        );
-        setUser(response.data.details);
-        console.log("This is the data from the backend >>>>>>>", response.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
-  const trips = [
-    { id: 1, title: "Trip 1", description: "Description 1" },
-    { id: 2, title: "Trip 2", description: "Description 2" },
-    { id: 3, title: "Trip 3", description: "Description 3" },
-  ];
 
   const handleEdit = () => {
     // Handle edit functionality

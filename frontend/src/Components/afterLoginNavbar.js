@@ -5,13 +5,14 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar(props) {
   // const location=useLocation()
+  const token=localStorage.getItem("accesstoken")
   const userId = localStorage.getItem("userId");
   return (
     <nav
       className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode} `}
     >
       <div className="container-fluid NewNavbarContent">
-        <NavLink className="navbar-brand" to="/Dashboard/:id">
+        <NavLink className="navbar-brand" to={`/Dashboard/${userId}`}>
           <img
             src={logo}
             alt="Logo"
@@ -77,7 +78,10 @@ export default function Navbar(props) {
                   <li>
                     <NavLink
                       to="/Home"
-                      onClick={() => props.onFormSwitch("home")}
+                      onClick={() => {
+                        localStorage.removeItem("accessToken");
+                        localStorage.removeItem("userId");
+                      }}
                       className="dropdown-item  "
                     >
                       Log Out

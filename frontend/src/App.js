@@ -34,6 +34,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+import LoginHome from "./Components/LoginHome";
 
 // const PrivateRoute = ({ element: Element, ...rest }) => {
 //   const isAuthenticated = !!localStorage.getItem('accessToken');
@@ -47,24 +48,25 @@ import {
 // };
 
 function App() {
+  const token=localStorage.getItem("accessToken")
   const apiKey = "AIzaSyDnqzvG0A1JmiMvayhbt_T_5IXtRO0DiHQ";
-  const [currentForm, setCurrentForm] = useState(
-    localStorage.getItem("accesstoken")
-      ? localStorage.getItem("accessToken")
-      : "home"
-  );
+  // const [currentForm, setCurrentForm] = useState(
+  //   localStorage.getItem("accesstoken")
+  //     ? localStorage.getItem("accessToken")
+  //     : token
+  // );
 
-  const toggleForm = (forName) => {
-    if (forName === "home") {
-      setCurrentForm("home");
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("userId");
-    } else {
-      setCurrentForm(forName);
-      localStorage.setItem("accessToken", forName);
-      // localStorage.setItem("userId", forName);
-    }
-  };
+  // const toggleForm = (forName) => {
+  //   if (forName === token) {
+  //     setCurrentForm(token);
+  //     localStorage.removeItem("accessToken");
+  //     localStorage.removeItem("userId");
+  //   } else {
+  //     setCurrentForm(forName);
+  //     localStorage.setItem("accessToken", forName);
+  //     localStorage.setItem("userId", forName);
+  //   }
+  // };
 
   const [result, setResult] = useState(null);
   const [modal, setmodal] = useState(false);
@@ -76,19 +78,15 @@ function App() {
       <div>
         <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
         <Router>
-          {!localStorage.getItem("accessToken") &&
-          !localStorage.getItem("userId") ? (
+
+          {token===null ? (
             <Navbar1 mode="light" setmodal={setmodal} />
           ) : (
-            <Navbar2
-              mode="light"
-              onFormSwitch={toggleForm}
-              
-            />
+            <Navbar2 mode="light"   />
           )}
 
           <Routes>
-            {localStorage.getItem("accessToken") ? (
+            {!token ? (
               <Route
                 path="/"
                 element={<Home modal={modal} setmodal={setmodal} />}
@@ -96,7 +94,7 @@ function App() {
             ) : (
               <Route
                 path="/"
-                element={<Home modal={modal} setmodal={setmodal} />}
+                element={<LoginHome modal={modal} setmodal={setmodal} />}
               />
             )}
 
@@ -136,7 +134,7 @@ function App() {
               path="/Login"
               element={
                 <Login
-                  onFormSwitch={toggleForm}
+                 
                   modal={modal}
                   setmodal={setmodal}
                 />

@@ -573,10 +573,9 @@ export default function Home(props) {
                     }}
                   />
                   <div className="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>
-                      Some representative placeholder content for the first
-                      slide.
+                    <h5 className="quicksand20">BOUDHANATH</h5>
+                    <p className="quicksand18">
+                     Boudha, Kathmandu
                     </p>
                   </div>
                 </div>
@@ -591,10 +590,9 @@ export default function Home(props) {
                     }}
                   />
                   <div className="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>
-                      Some representative placeholder content for the first
-                      slide.
+                    <h5 className="quicksand20">CHITWAN NATIONAL PARK</h5>
+                    <p className="quicksand18">
+                      Sauraha, Chitwan
                     </p>
                   </div>
                 </div>
@@ -609,10 +607,9 @@ export default function Home(props) {
                     }}
                   />
                   <div className="carousel-caption d-none d-md-block">
-                    <h5>First slide label</h5>
-                    <p>
-                      Some representative placeholder content for the first
-                      slide.
+                    <h5 className="quicksand20">BHAKTAPUR DURBAR SQUARE</h5>
+                    <p className="quicksand18">
+                      Bhaktapur, Nepal
                     </p>
                   </div>
                 </div>

@@ -30,7 +30,7 @@ function Card1() {
               <Card.Img variant="top" src={plans[index]?.imageUrl || "placeholder.jpg"} />
               <Card.Body>
                 <Card.Title>{plans[index]?.name || "Card Title"}</Card.Title>
-                <Button variant="primary">View</Button>
+                <Button variant="danger">View</Button>
               </Card.Body>
             </div>
           </div>

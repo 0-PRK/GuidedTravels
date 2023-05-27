@@ -1,9 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import "../App.css";
 import { Box, Flex, SkeletonText } from "@chakra-ui/react";
-import { useJsApiLoader, GoogleMap, Marker, Autocomplete } from "@react-google-maps/api";
+import {
+  useJsApiLoader,
+  GoogleMap,
+  Marker,
+  Autocomplete,
+} from "@react-google-maps/api";
 import img from "./images/defaultuser.png";
-import { useParams } from "react-router-dom";
+
+import { useParams,NavLink } from "react-router-dom";
 import { BiCurrentLocation } from "react-icons/bi"; // Import the location icon
 import Card1 from "./cards";
 import UseFetch from "../Hooks/UseFetch";
@@ -70,21 +76,25 @@ export default function Afterlogin(props) {
   };
 
   return (
-    <div className="Dashboard-container">
+    <div className="fit container Dashboard-container">
       <div className="Dashboard-user-details">
-        <div className="Dashboard-profile-box">
+        <div className="Dashboard-profile-box quicksand18">
           <div className="Dashboard-profile-image">
-            <img src={imgSrc} alt="Profile" className="Dashboard-circular-image" />
+            <img
+              src={imgSrc}
+              alt="Profile"
+              className="Dashboard-circular-image"
+            />
           </div>
           <div className="Dashboard-user-info">
             <div className="Dashboard-full-name">
-              <h5>{user.name}</h5>
+              <h5> <b>Welcome!</b> {user.name}</h5>
             </div>
             <div className="user-name">
-              <h5>@{user.username}</h5>
+              <h5><b>Username:-</b>@{user.username}</h5>
             </div>
             <div className="user-name">
-              <h5>{user.email}</h5>
+              <h5><b>Email:-</b>{user.email}</h5>
             </div>
           </div>
         </div>
@@ -94,7 +104,7 @@ export default function Afterlogin(props) {
             <Box w="100%" h="100%">
               <GoogleMap
                 center={mapCenter}
-                zoom={defaultMapOptions.zoom}
+                zoom={15}
                 mapContainerStyle={{ width: "100%", height: "100%" }}
                 options={{
                   zoomControl: true,
@@ -103,7 +113,9 @@ export default function Afterlogin(props) {
                   fullscreenControl: true,
                 }}
               >
+                {<Marker position={mapCenter} />}
                 {userLocation && <Marker position={userLocation} />}
+
                 <Autocomplete
                   onLoad={(autocomplete) => {
                     searchBoxRef.current = autocomplete;
@@ -152,17 +164,16 @@ export default function Afterlogin(props) {
           </Flex>
         </div>
       </div>
+      <div className="alignCenter"> <hr className="line1" /></div>
+     
 
       <div className="trip-section">
         <div>
-          <h2>Your Trips</h2> <button> + New Trip</button>
+          <h2 className="alignCenter quicksand20">My Trips</h2> <div className="quicksand200"><NavLink to="/plantrip"><button style={{width:"300px",height:"100px"}}type="button" class="btn btn-danger "><h1>+ PLAN TRIP</h1></button></NavLink></div><br/>
           <Card1 />
         </div>
+<br/>
 
-        <div>
-          <h2>Upcoming trips</h2>
-          <Card1 />
-        </div>
       </div>
     </div>
   );

@@ -6,10 +6,13 @@ import imga from "./images/boud.jpg";
 import imgb from "./images/chit.webp";
 import imgc from "./images/bkt.jpg";
 import AddPlace from "./addPlace";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
-// import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+// import { useSelector } from 'react-redux';
+
 
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Box, Button, Flex, Input, SkeletonText } from "@chakra-ui/react";
@@ -33,6 +36,7 @@ export default function LoginHome(props) {
   const [carouselImages, setCarouselImages] = useState("");
   const tripDetail = useSelector((state) => state.tripSlice);
   const itinerary = useSelector((state) => state.itinerarySlice.itinerary);
+  const history = useNavigate();
 
   // const itinerary = [{name: "Boudha"}, {name: "Patan"}]
   //const [streetViewImageUrl, setStreetViewImageUrl] = useState("");
@@ -80,6 +84,8 @@ export default function LoginHome(props) {
   const [lat1, setlat1] = useState(27.7172);
   const [lng1, setlng1] = useState(85.324);
   const center = { lat: lat1, lng: lng1 };
+  const userId = localStorage.getItem("userId");
+  const token = localStorage.getItem("accessToken");
   // const location = useLocation();
   // const { destination } = location.state || {};
   const { isLoaded } = useJsApiLoader({
@@ -130,10 +136,62 @@ export default function LoginHome(props) {
 
   if (!tripDetail.location || !tripDetail.geoLocation) return;
 
+  
+
   Point1();
 
-  const handleSubmit = () => {
-    console.log("Itinerary", itinerary);
+  const headers = {
+    Authorization: token,
+    "Content-Type": "application/json",
+  };
+
+  const handleSubmit = async() => {
+    try {
+      const values = {
+        name:tripDetail.loaction,
+        user_id:userId,
+        startDate:tripDetail.startDate,
+        endDate:tripDetail.endDate,
+
+      };
+      console.log(tripDetail.location);
+      const res = await axios.post("http://localhost:4000/plans/plan", values,{headers});
+      console.log(values);
+      if (res.error) {
+        toast.error(res.error);
+      } else {
+        // props.onFormSwitch(res.data.accessToken);
+
+        toast.success("Trip Created Successfully");
+          history(`/Dashboard/${userId}`);
+        
+      }
+    } catch (err) {
+      toast.error("error")
+      console.log(err);
+    }
+
+
+
+    // const url = "http://localhost:4000/plans/plan"; //backend API URL
+    // const values = {
+    //   itinerary,user_id:userId
+    // };
+    
+    // const data=axios.post(url, values,{headers})
+    // .then((res) => {
+    //     console.log(values)
+    //     if (res.error) {
+    //       toast.error(res.error);
+    //     } else {
+    //       toast.success("Trip Created Successfully");
+    //       history(`/Dashboard/${userId}`);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     toast.error("error");
+    //     console.log(error);
+    //   });
   };
 
   return (
@@ -190,11 +248,11 @@ export default function LoginHome(props) {
                 data-bs-parent="#accordionExample"
               >
                 <ul style={{ listStyleType: "disc" }}>
-                      <li>Expenses 1</li>
-                      <li>Expenses 1</li>
-                      <li>Expenses 1</li>
-                      <li>Expenses 1</li>
-                    </ul>
+                  <li>Expenses 1</li>
+                  <li>Expenses 1</li>
+                  <li>Expenses 1</li>
+                  <li>Expenses 1</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -203,47 +261,47 @@ export default function LoginHome(props) {
           <GridContainer>
             <Grid>
               <Column>
-              <div
-              id="carouselExampleAutoplaying"
-              className="carousel slide "
-              data-bs-ride="carousel"
-            >
-              <div className="carousel-inner">
-                <div className="carousel-item active fixx">
-                  <img src={imga} className="d-block w-100" alt="..." />
+                <div
+                  id="carouselExampleAutoplaying"
+                  className="carousel slide "
+                  data-bs-ride="carousel"
+                >
+                  <div className="carousel-inner">
+                    <div className="carousel-item active fixx">
+                      <img src={imga} className="d-block w-100" alt="..." />
+                    </div>
+                    <div className="carousel-item fixx">
+                      <img src={imgb} className="d-block w-100" alt="..." />
+                    </div>
+                    <div className="carousel-item fixx">
+                      <img src={imgc} className="d-block w-100" alt="..." />
+                    </div>
+                  </div>
+                  <button
+                    className="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      className="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span className="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    className="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      className="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span className="visually-hidden">Next</span>
+                  </button>
                 </div>
-                <div className="carousel-item fixx">
-                  <img src={imgb} className="d-block w-100" alt="..." />
-                </div>
-                <div className="carousel-item fixx">
-                  <img src={imgc} className="d-block w-100" alt="..." />
-                </div>
-              </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleAutoplaying"
-                data-bs-slide="prev"
-              >
-                <span
-                  className="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleAutoplaying"
-                data-bs-slide="next"
-              >
-                <span
-                  className="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span className="visually-hidden">Next</span>
-              </button>
-            </div>
 
                 <div className="contact-short1">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-center">
@@ -272,13 +330,13 @@ export default function LoginHome(props) {
                   </p>
                 ))}
                 <div className="alignCenter">
-                <Button
-                  colorScheme="purple"
-                  type="submit"
-                  onClick={handleSubmit}
-                >
-                  Submit
-                </Button>
+                  <Button
+                    colorScheme="purple"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </Button>
                 </div>
               </Column>
             </Grid>

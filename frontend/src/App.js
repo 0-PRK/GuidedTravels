@@ -4,6 +4,7 @@ import React from "react";
 import "./App.css";
 import About from "./Components/About";
 import Navbar1 from "./Components/Navbar";
+// import Plan from "./Components/planTrip";
 import Navbar2 from "./Components/afterLoginNavbar";
 import Home from "./Components/Home";
 import Loginhome from "./Components/LoginHome";
@@ -93,7 +94,6 @@ function App() {
                 </Protected>
               }
             />
-
             <Route
               path="/Login"
               element={
@@ -108,6 +108,14 @@ function App() {
               path="/addPlace"
               element={<AddPlace data={data} setData={setData} />}
             />
+             <Route
+              path="/plantrip"
+              element={
+                <Protected>
+                  <PlanTrip data={data} setData={setData} />
+                </Protected>
+              }
+            /> 
 
             <Route
               path="/forgetPw"
@@ -124,6 +132,8 @@ function App() {
               element={<Register modal={modal} setmodal={setmodal} />}
             />
             <Route path="/About" element={<About />} />
+
+
             <Route
               path="/Dashboard/settings/:id"
               element={
@@ -140,13 +150,11 @@ function App() {
                 </Protected>
               }
             />
-            {/* </Route> */}
 
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </div>
-
     </>
   );
 }

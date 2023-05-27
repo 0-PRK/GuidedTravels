@@ -32,16 +32,11 @@ export const Login = (props) => {
       if (res.error) {
         toast.error(res.error);
       } else {
-        // props.onFormSwitch(res.data.accessToken);
-
+        props.onFormSwitch(res.data.accessToken);
         localStorage.setItem("userId", res.data.user_id);
-        localStorage.setItem("accessToken", res.data.accessToken);
         toast.success("Logged in successfully");
         const userId = localStorage.getItem("userId");
-        
         history(`/Dashboard/${userId}`);
-        window.location.reload();
-        
       }
     } catch (err) {
       toast.error("error")

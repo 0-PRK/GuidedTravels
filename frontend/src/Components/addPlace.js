@@ -64,10 +64,9 @@ async function getAttractions() {
         // console.log("banepa", data);
         if (data.status === "OK") {
           const { lat, lng } = data.results[0].geometry.location;
-          const address1 = data.results[0].formatted_address;
           // setlat1(lat);
           // setlng1(lng);
-          const geoLocation =  {lat, lng,address1};
+          const geoLocation =  {lat, lng};
           console.log(geoLocation)
           // dispatch(setItinerary(geoLocation))
           dispatch(setItinerary2({geoLocation, index}))
@@ -93,7 +92,7 @@ console.log(index)
               aria-expanded="true"
               aria-controls={`collapse-${data}`}
             >
-              Day {index+1}
+              Day {index}
             </button>
           </h2>
           <AddedPlace data={data}/>

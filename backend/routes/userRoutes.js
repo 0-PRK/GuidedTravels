@@ -37,7 +37,7 @@ userRouter.route("/signup").post(signup);  //done
 
 userRouter.route("/forgetpassword").post(forgetpassword);
 
-userRouter.route("/resetpassword/:token").patch(resetpassword);
+userRouter.route("/resetpassword/:token").post(resetpassword);
 
 userRouter.route("/login").post(login);  //done
 

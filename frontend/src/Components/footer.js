@@ -9,9 +9,9 @@ export default function footer(props) {
         <div className="contact-short">
           <div>
             <div className="d-grid gap-2 d-md-flex justify-content-md-center">
-              <h2>
+              <h1>
                 Ready to get started? <span> </span>
-              </h2>
+              </h1>
               <Link to ="../Login">
               <button type="button"  className=" btn btn-outline-light btn-lg">
                 Get Started

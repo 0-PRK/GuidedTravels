@@ -244,7 +244,62 @@ export default function LoginHome(props) {
                 <span className="visually-hidden">Next</span>
               </button>
             </div>
-
+                    {/*                <div
+                  id="carouselExampleAutoplaying"
+                  className="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div className="carousel-inner">
+                    {carouselImages.length > 0 ? (
+                      carouselImages.map((imageUrl, index) => (
+                        <div
+                          className={`carousel-item ${
+                            index === 0 ? "active" : ""
+                          }`}
+                          key={index}
+                        >
+                          <img
+                            src={imageUrl}
+                            className="d-block w-100"
+                            alt={`Place ${index + 1}`}
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <div className="carousel-item active">
+                        <img
+                          src={imgb}
+                          className="d-block w-100"
+                          alt="Default"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    className="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      className="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span className="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    className="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      className="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span className="visually-hidden">Next</span>
+                  </button>
+                    </div>*/}
                 <div className="contact-short1">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-center">
                     <h2>
@@ -265,13 +320,12 @@ export default function LoginHome(props) {
                   <p key={item}>
                     <AddPlace
                       data={item}
-                      index={index}
+                      index={index+1}
                       setlat1={setlat1}
                       setlng1={setlat1}
                     />
                   </p>
                 ))}
-                <div className="alignCenter">
                 <Button
                   colorScheme="purple"
                   type="submit"
@@ -279,7 +333,6 @@ export default function LoginHome(props) {
                 >
                   Submit
                 </Button>
-                </div>
               </Column>
             </Grid>
           </GridContainer>
@@ -305,7 +358,7 @@ export default function LoginHome(props) {
                 }}
                 onLoad={(map) => setMap(map)}
               >
-                {<Marker position={center} />}
+                <Marker position={center} />
                 {directionsResponse && (
                   <DirectionsRenderer directions={directionsResponse} />
                 )}

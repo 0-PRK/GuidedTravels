@@ -104,7 +104,6 @@ function App() {
               path="/Home"
               element={<Home modal={modal} setmodal={setmodal} />}
             />
-            {/* <Route path="/LoginHome/plans/plan/:id" element={<PrivateRoute />}> */}
             <Route
               path="/LoginHome/plans/plan/:id"
               element={
@@ -182,9 +181,6 @@ function App() {
                 </Protected>
               }
             />
-            {/* </Route> */}
-
-            {/* <Route path="/Dashboard/:id" element={<PrivateRoute />}> */}
             <Route
               path="/Dashboard/:id"
               element={

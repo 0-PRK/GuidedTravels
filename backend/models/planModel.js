@@ -15,10 +15,12 @@ const planSchema = new mongoose.Schema({
     required:false,
     ref:'Plan'
   },
+
   name: {
     type: String,
     required: true,
   },
+  
   imageUrl: {
     type: String,
     required: false,

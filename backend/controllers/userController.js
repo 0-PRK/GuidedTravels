@@ -141,7 +141,7 @@ module.exports.updatepw = async function updatepw(req, res) {
             if (pass === cpass) {
                 console.log(id);
                 // Update the password field in the user object
-                user.pass = pass;
+                user.password = pass;
 
                 // Save the updated user without running validations
                 const updatedData = await user.save({ validateBeforeSave: false });
@@ -167,33 +167,6 @@ module.exports.updatepw = async function updatepw(req, res) {
         });
     }
 };
-
-
-
-
-module.exports.deleteUsers = async function deleteUser(req, res) {
-    // users={}
-    try {
-        let id = req.params.id;
-        let user = await User.
-            findByIdAndDelete(id);
-        if (!user) {
-            res.json({
-                message: "user nor found"
-            })
-        }
-        res.json({
-            message: "data has been deleted",
-            data: user,
-        });
-    }
-
-    catch (err) {
-        res.json({
-            message: err.message
-        });
-    }
-}
 
 // module.exports.getAllUser=async function getAllUser( req, res){
 //     let users=await User.find();

@@ -144,14 +144,14 @@ function App() {
               path="/addPlace"
               element={<AddPlace data={data} setData={setData} />}
             />
-            <Route
+            {/* <Route
               path="/plantrip"
               element={
                 <Protected>
                   <Plan data={data} setData={setData} />
                 </Protected>
               }
-            />
+            /> */}
 
             <Route
               path="/forgetPw"
@@ -159,7 +159,7 @@ function App() {
             />
 
             <Route
-              path="/confirmPW"
+              path="/resetpassword/:id"
               element={<ConfirmPW modal={modal} setmodal={setmodal} />}
             />
 

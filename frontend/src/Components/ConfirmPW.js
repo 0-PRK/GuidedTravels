@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { useParams } from 'react-router-dom';
 // import { PropTypes } from "prop-types";
 import { toast } from "react-hot-toast";
 import { Container } from "@mui/material";
@@ -21,30 +22,6 @@ const id = localStorage.getItem("userId");
 
 
 
-//   async function Submit(e) {
-//     e.preventDefault();
-//     try {
-//       console.log(email);
-//       const values = {
-//         email,
-
-//       };
-//       console.log(values);
-//       const res = await axios.post("http://localhost:4000/user/login", values);
-//       if (res.error) {
-//         toast.error(res.error);
-//       } else {
-//         props.onFormSwitch(res.data.accessToken);
-//         localStorage.setItem("userId", res.data.user_id);
-//         toast.success("Logged in successfully");
-//         const userId = localStorage.getItem("userId");
-//         history(`/Dashboard/${userId}`);
-//       }
-//     } catch (err) {
-//       toast.error("error");
-//       console.log(err);
-//     }
-//   }
 
 
   return (

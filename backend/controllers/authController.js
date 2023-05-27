@@ -74,7 +74,7 @@ module.exports.login = async function loginUser(req, res) {
         });
       } else {
       res.status(401);
-      throw new Error("email or password is not valid");
+      throw new error("email or password is not valid");
     }
   } catch (err) {
     return res.status(400).json({
@@ -82,49 +82,6 @@ module.exports.login = async function loginUser(req, res) {
     });
   }
 };
-
-//login user
-
-// module.exports.login = async function loginUser(req, res) {
-//   try {
-//     let data = req.body;
-
-//     if (data.email) {
-//       let user = await User.findOne({ email: data.email });
-//       if (user && user.password == data.password) {
-//         //bcrypt -> compare
-//         const accessToken =jwt.sign({
-//             user: {
-//                 username: user.username,
-//                 email: user.email,
-//                 id: user.id,
-//             },
-//             JWT_KEY,
-//             {expiresIn:1*100*60}
-//         })
-//         res.json({accessToken});
-//         }
-
-//         else {
-//           return res.json({
-//             message: "wrong credentials",
-//           });
-//         }
-
-//       }
-//      else {
-//       return res.json({
-//         message: "Empty Field",
-//       });
-//     }
-//     }
-//    catch (err) {
-//     return res.json({
-//       message: err.message,
-//     });
-//   }
-
-// };
 
 //isAuthorized to check role
 
@@ -149,9 +106,7 @@ module.exports.forgetpassword = async function forgetpassword(req, res) {
     const user = await User.findOne({ email: email });
     if (user) {
       const resetToken = user.createResetToken();
-      let resetPasswordLink = `${req.protocal}://${req.get(
-        "host"
-      )}/resetpassword/${resetToken}`; // //domain name for reset password link
+      let resetPasswordLink = `localhost:3000/resetpassword/${resetToken}`; // //domain name for reset password link
       //send email to user
       //nodemailer
       let obj = {
@@ -163,13 +118,13 @@ module.exports.forgetpassword = async function forgetpassword(req, res) {
         message: "mail sent",
       });
     } else {
-      return res.json({
-        message: "please signup",
+      return res.status(404).json({
+        error: "please signup",
       });
     }
   } catch (err) {
     res.status(404).json({
-      message: err.message,
+      error: err.message,
     });
   }
 };
@@ -188,12 +143,12 @@ module.exports.resetpassword = async function resetpassword(req, res) {
       });
     } else {
       res.json({
-        message: "Not a user",
+        error: "Not a user",
       });
     }
   } catch (err) {
     res.json({
-      message: err.message,
+      error: err.message,
     });
   }
 };

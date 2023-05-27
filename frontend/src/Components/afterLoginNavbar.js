@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types"; //impt
 import logo from "./images/navLogo.png";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 
 export default function Navbar(props) {
   // const location=useLocation()
-  const token=localStorage.getItem("accesstoken")
   const userId = localStorage.getItem("userId");
   return (
     <nav

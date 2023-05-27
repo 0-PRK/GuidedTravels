@@ -92,7 +92,7 @@ console.log(index)
               aria-expanded="true"
               aria-controls={`collapse-${data}`}
             >
-              Day {index}
+              Day {index+1}
             </button>
           </h2>
           <AddedPlace data={data}/>

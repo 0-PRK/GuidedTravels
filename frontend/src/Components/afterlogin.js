@@ -5,7 +5,6 @@ import { useJsApiLoader, GoogleMap, Marker, Autocomplete } from "@react-google-m
 import img from "./images/defaultuser.png";
 import { useParams } from "react-router-dom";
 import { BiCurrentLocation } from "react-icons/bi"; // Import the location icon
-
 import Card1 from "./cards";
 import UseFetch from "../Hooks/UseFetch";
 

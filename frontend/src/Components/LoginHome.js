@@ -320,7 +320,7 @@ export default function LoginHome(props) {
                   <p key={item}>
                     <AddPlace
                       data={item}
-                      index={index+1}
+                      index={index}
                       setlat1={setlat1}
                       setlng1={setlat1}
                     />

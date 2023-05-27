@@ -132,7 +132,7 @@ module.exports.forgetpassword = async function forgetpassword(req, res) {
 //reset password
 module.exports.resetpassword = async function resetpassword(req, res) {
   try {
-    const token = req.parmas.token;
+    const token = req.body.id;
     let { password, confirmpassword } = req.body;
     const user = await User.findOne({ resetToken: token });
     if (user) {

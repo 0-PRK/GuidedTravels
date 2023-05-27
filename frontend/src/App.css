@@ -874,3 +874,23 @@
   flex: 1;
   margin-top: 20px; 
 } 
+
+
+/* card css */
+
+
+.cards-card-scroll-container {
+  overflow-x: auto;
+  padding-bottom: 15px;
+}
+
+.cards-card-stack {
+  display: flex;
+  gap: 15px;
+}
+
+.cards-card {
+  flex: 0 0 auto;
+  margin-right: 10px;
+}
+

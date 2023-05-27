@@ -10,9 +10,9 @@ import Upload from "./images/Upload-icon.png";
 import { useParams } from "react-router-dom";
 import img1 from "./images/navLogo.png";
 import { NavLink } from "react-router-dom";
+import UseFetch from "../Hooks/UseFetch";
 
 export default function Settings(props) {
-  const [user, setUser] = useState({});
   const [email, setEmail] = useState("");
   const [mod, setMod] = useState("false");
   // const [pass, setPass] = useState("");
@@ -21,10 +21,11 @@ export default function Settings(props) {
   const [pass, setPass] = useState("");
   // const [cpass, setcPass] = useState("");
   const [imgSrc, setImgSrc] = useState(img);
-
+  
   const navigate = useNavigate();
-
+  
   const { id } = useParams();
+  const {user} = UseFetch(`http://localhost:4000/user/userProfile/${id}`)
 
   const token = localStorage.getItem("accessToken");
 
@@ -32,24 +33,6 @@ export default function Settings(props) {
     Authorization: token,
     "Content-Type": "application/json",
   };
-
-  // fetching image and name from database
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:4000/user/userProfile/${id}`,
-          { headers }
-        );
-        setUser(response.data.details);
-        console.log("This is the data from the backend >>>>>>>", response.data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchData();
-  }, [id]);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0]; // Get the selected file

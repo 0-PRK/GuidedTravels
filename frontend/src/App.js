@@ -160,7 +160,7 @@ function App() {
             />
 
             <Route
-              path="/confirmPW"
+              path="/pw/:id"
               element={<ConfirmPW modal={modal} setmodal={setmodal} />}
             />
 

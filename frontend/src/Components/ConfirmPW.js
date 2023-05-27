@@ -10,13 +10,14 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
+
 import img1 from "./images/navLogo.png";
 
 export default function ConfirmPW(props) {
 //   const history = useNavigate();
 
-const [pass, setPass] = useState("");
-const [cpass, setcPass] = useState("");
+const [password, setPass] = useState("");
+const [confirmpassword, setcPass] = useState("");
 const navigate = useNavigate();
 const user_id = localStorage.getItem("userId");
 
@@ -36,8 +37,8 @@ const handleSubmit = async (e) => {
     // name,
     // username: uname,
     // email,
-    password: pass,
-    confirmPassword: cpass,
+    pass:password,
+    cpass:confirmpassword,
   };
 
 
@@ -45,7 +46,7 @@ const handleSubmit = async (e) => {
   try {
     // Send the updated settings to the backend API
     const { data } = await axios.patch(
-      `http://localhost:4000/user/userProfile/${user_id}`,
+      `http://localhost:4000/user/userProfile/pw/${user_id}`,
       values,
       { headers }
     );
@@ -59,7 +60,7 @@ const handleSubmit = async (e) => {
   } catch (error) {
     // Display error message received from the backend
     const errorMessage = error.response.data.message;
-    toast.error(errorMessage);
+    toast.error("Password didnt match");
   }
 };
 
@@ -127,7 +128,7 @@ const handleSubmit = async (e) => {
           >
           <br/>
         <input
-          value={pass}
+          value={password}
           required
           onChange={(e) => setPass(e.target.value)}
           type="password"
@@ -138,7 +139,7 @@ const handleSubmit = async (e) => {
         />
         <br/>
         <input
-          value={cpass }
+          value={confirmpassword }
           required
           onChange={(e) => setcPass(e.target.value)}
           type="password"

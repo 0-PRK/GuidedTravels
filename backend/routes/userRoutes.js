@@ -6,6 +6,7 @@ const {
   getUser,
   updateUsers,
   deleteUsers,
+  updatepw,
   getAllUser,
   updateProfileImage,
 } = require("../controllers/userController");
@@ -54,6 +55,9 @@ userRouter.route("/userProfile/:id")
 .patch(updateUsers)   //done
 .delete(deleteUsers)//done
 .get(getUser);
+
+userRouter.route("/userProfile/pw/:id")
+.patch(updatepw)
 
 // //multer for fileupload
 // const multerStorage=multer.diskStorage({

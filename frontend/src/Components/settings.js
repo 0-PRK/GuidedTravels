@@ -177,7 +177,7 @@ export default function Settings(props) {
                 <NavLink
                   className="nav-link "
                   style={{ font: "Montserrat", fontSize: 30 }}
-                  to="/confirmPW"
+                  to={`/pw/${id}`}
                 >
                   Edit Password
                 </NavLink>

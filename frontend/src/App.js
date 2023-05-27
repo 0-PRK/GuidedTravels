@@ -4,27 +4,21 @@ import React from "react";
 import "./App.css";
 import About from "./Components/About";
 import Navbar1 from "./Components/Navbar";
-import Plan from "./Components/planTrip";
+// import Plan from "./Components/planTrip";
 import Navbar2 from "./Components/afterLoginNavbar";
 import Home from "./Components/Home";
-import Carousel1 from "./Components/Carousel";
-//import ProfileScreen from "./Components/ProfileScreen";
 import Loginhome from "./Components/LoginHome";
 import HomeLOGIN from "./Components/afterlogin"
 import Settings from "./Components/settings";
 import ForgetPW from "./Components/forgetPW";
 import ConfirmPW from "./Components/ConfirmPW";
 import AddPlace from "./Components/addPlace";
-import DateCalculator from "./Components/planTrip";
 import PlanTrip from "./Components/planTrip";
 import NotFound from "./Components/NotFound";
 import Protected from "./PrivateRoute";
 
-// import LoginScreen from "./Components/LoginScreen";
 import { Toaster } from "react-hot-toast";
 import Afterlogin from "./Components/afterlogin";
-//import Carousel1 from "./Components/Carousel";
-// import axios from 'axios';
 
 import { Login } from "./Components/Login";
 import { Register } from "./Components/Register";
@@ -37,37 +31,9 @@ import {
 } from "react-router-dom";
 import LoginHome from "./Components/LoginHome";
 
-// const PrivateRoute = ({ element: Element, ...rest }) => {
-//   const isAuthenticated = !!localStorage.getItem('accessToken');
-
-//   return (
-//     <Route
-//       {...rest}
-//       element={isAuthenticated ? <Element /> : <Navigate to="/login" />}
-//     />
-//   );
-// };
 
 function App() {
   const token=localStorage.getItem("accessToken")
-  const apiKey = "AIzaSyDnqzvG0A1JmiMvayhbt_T_5IXtRO0DiHQ";
-  // const [currentForm, setCurrentForm] = useState(
-  //   localStorage.getItem("accesstoken")
-  //     ? localStorage.getItem("accessToken")
-  //     : token
-  // );
-
-  // const toggleForm = (forName) => {
-  //   if (forName === token) {
-  //     setCurrentForm(token);
-  //     localStorage.removeItem("accessToken");
-  //     localStorage.removeItem("userId");
-  //   } else {
-  //     setCurrentForm(forName);
-  //     localStorage.setItem("accessToken", forName);
-  //     localStorage.setItem("userId", forName);
-  //   }
-  // };
 
   const [result, setResult] = useState(null);
   const [modal, setmodal] = useState(false);
@@ -103,7 +69,7 @@ function App() {
               path="/Home"
               element={<Home modal={modal} setmodal={setmodal} />}
             />
-            {/* <Route path="/LoginHome/plans/plan/:id" element={<PrivateRoute />}> */}
+
             <Route
               path="/LoginHome/plans/plan/:id"
               element={
@@ -130,7 +96,6 @@ function App() {
                 </Protected>
               }
             />
-            {/* </Route> */}
             <Route
               path="/Login"
               element={
@@ -145,14 +110,14 @@ function App() {
               path="/addPlace"
               element={<AddPlace data={data} setData={setData} />}
             />
-            {/* <Route
+             <Route
               path="/plantrip"
               element={
                 <Protected>
-                  <Plan data={data} setData={setData} />
+                  <PlanTrip data={data} setData={setData} />
                 </Protected>
               }
-            /> */}
+            /> 
 
             <Route
               path="/forgetPw"
@@ -171,7 +136,6 @@ function App() {
             <Route path="/About" element={<About />} />
 
 
-            {/* <Route path="/Dashboard/settings/:id" element={<PrivateRoute />}> */}
             <Route
               path="/Dashboard/settings/:id"
               element={
@@ -180,9 +144,7 @@ function App() {
                 </Protected>
               }
             />
-            {/* </Route> */}
 
-            {/* <Route path="/Dashboard/:id" element={<PrivateRoute />}> */}
             <Route
               path="/Dashboard/:id"
               element={
@@ -191,27 +153,11 @@ function App() {
                 </Protected>
               }
             />
-            {/* </Route> */}
 
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </div>
-
-      {/* <div>
-        <ProfileScreen/>
-      </div> */}
-
-      {/*<div>
-        <h1>POPULAR DESTINATIONSs</h1>
-        <Carousel1/>
-      </div>
-        <Afterlogin/> */}
-
-      {/* <div>
-        <h1>POPULAR DESTINATIONS</h1>
-        <Carousel1/>
-      </div> */}
     </>
   );
 }

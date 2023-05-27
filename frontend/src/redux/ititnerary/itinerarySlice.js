@@ -26,6 +26,7 @@ const itinerarySlice = createSlice({
     setItinerary2: (state, action) => {
         console.log("fs 2", action.payload)
             state.itinerary[action.payload.index].push(action.payload.geoLocation);
+            window.location.reload();
 
     },
   },

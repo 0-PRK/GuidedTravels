@@ -64,9 +64,10 @@ async function getAttractions() {
         // console.log("banepa", data);
         if (data.status === "OK") {
           const { lat, lng } = data.results[0].geometry.location;
+          const address1 = data.results[0].formatted_address;
           // setlat1(lat);
           // setlng1(lng);
-          const geoLocation =  {lat, lng};
+          const geoLocation =  {lat, lng,address1};
           console.log(geoLocation)
           // dispatch(setItinerary(geoLocation))
           dispatch(setItinerary2({geoLocation, index}))

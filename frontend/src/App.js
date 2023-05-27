@@ -10,6 +10,7 @@ import Home from "./Components/Home";
 import Carousel1 from "./Components/Carousel";
 //import ProfileScreen from "./Components/ProfileScreen";
 import Loginhome from "./Components/LoginHome";
+import HomeLOGIN from "./Components/afterlogin"
 import Settings from "./Components/settings";
 import ForgetPW from "./Components/forgetPW";
 import ConfirmPW from "./Components/ConfirmPW";
@@ -94,7 +95,7 @@ function App() {
             ) : (
               <Route
                 path="/"
-                element={<LoginHome modal={modal} setmodal={setmodal} />}
+                element={<HomeLOGIN modal={modal} setmodal={setmodal} />}
               />
             )}
 
@@ -169,7 +170,6 @@ function App() {
             />
             <Route path="/About" element={<About />} />
 
-            <Route path="/PlanTrip" element={<PlanTrip />} />
 
             {/* <Route path="/Dashboard/settings/:id" element={<PrivateRoute />}> */}
             <Route

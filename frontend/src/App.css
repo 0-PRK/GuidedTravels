@@ -227,6 +227,8 @@
   margin-right: 190px;
 }
 
+
+
 .alignLeft {
   align-items: left;
   justify-content: left;
@@ -263,6 +265,16 @@
   border: 0 none;
   margin-right: auto;
   margin-left: auto;
+  background-color: #6a6a6b;
+}
+.line1 {
+  width: 90%;
+  height: 3px;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  border: 0 none;
+
   background-color: #6a6a6b;
 }
 .right {
@@ -402,6 +414,12 @@
   text-align: center;
 }
 
+.quicksand200 {
+  font-family: quicksand;
+  font-size: calc(50px + 2vmin);
+
+}
+
 .btn btn-danger btn-lg {
   padding-top: 60%;
 }
@@ -467,7 +485,7 @@
 .pop1 {
   height: 670px;
   width: 20px;
-  top: 7%;
+  top: 2%;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -475,7 +493,7 @@
 .pop2 {
   height: 750px;
   width: 2px;
-  top: 6%;
+  top: 1%;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -565,9 +583,10 @@
 .column2 {
   background-color: #f2f2f2;
   /* outline: #666 dotted; */
-  min-width: 57%;
+  min-width: 60%;
   min-height: 100%;
 }
+
 
 .page-content{
   display: flex;
@@ -586,8 +605,8 @@
 
 .column3 {
   background-color: #f2f2f2;
-  max-width: 600px;
-  min-width: 600px;
+  max-width: 550px;
+  min-width: 550px;
   max-height: 800px;
 }
 
@@ -615,7 +634,8 @@
   padding-top: 10px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
+  width: 1490px;
 }
 
 .SettingsItem {
@@ -822,6 +842,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  
 }
 
 .Dashboard-user-details {

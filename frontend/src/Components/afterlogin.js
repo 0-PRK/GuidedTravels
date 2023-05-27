@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import React, { useState, useRef, useEffect } from "react";
 import "../App.css";
 import { Box, Flex, SkeletonText } from "@chakra-ui/react";
-import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
+import { useJsApiLoader, GoogleMap, Marker, Autocomplete } from "@react-google-maps/api";
 import img from "./images/defaultuser.png";
-import axios from "axios";
-import { useFetcher, useParams } from "react-router-dom";
-import Carousel1 from "./Carousel";
+import { useParams } from "react-router-dom";
+import { BiCurrentLocation } from "react-icons/bi"; // Import the location icon
+
 import Card1 from "./cards";
 import UseFetch from "../Hooks/UseFetch";
 
-export default function Afterlogin(props) {
-  // const user = {
+const defaultMapOptions = {
+  center: { lat: 27.7172, lng: 85.324 }, // Default center set to Nepal
+  zoom: 7,
+};
 
-  // const [user, setUser] = useState("");
-  const center = { lat: 27.7172, lng: 85.324 };
+export default function Afterlogin(props) {
   const [imgSrc, setImgSrc] = useState(img);
   const { id } = useParams();
-  const {user} = UseFetch(`http://localhost:4000/user/userProfile/${id}`)
-
-
-  const handleEdit = () => {
-    // Handle edit functionality
-  };
+  const { user } = UseFetch(`http://localhost:4000/user/userProfile/${id}`);
+  const searchBoxRef = useRef(null); // Ref for the search box component
+  const [mapCenter, setMapCenter] = useState(null); // State for map center
+  const [userLocation, setUserLocation] = useState(null); // State for user location
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -30,20 +28,54 @@ export default function Afterlogin(props) {
     libraries: ["places"],
   });
 
+  useEffect(() => {
+    setMapCenter(defaultMapOptions.center); // Set the default map center to Nepal
+  }, []);
+
   if (!isLoaded) {
     return <SkeletonText />;
   }
+
+  const handlePlaceSelect = () => {
+    // Get the selected place from the Autocomplete component
+    const selectedPlace = searchBoxRef.current.getPlace();
+
+    if (selectedPlace.geometry && selectedPlace.geometry.location) {
+      // Get the latitude and longitude of the selected place
+      const { lat, lng } = selectedPlace.geometry.location;
+
+      // Update the map center to the selected place
+      setMapCenter({ lat: lat(), lng: lng() });
+    }
+  };
+
+  const handleLocate = () => {
+    // Check if geolocation is supported by the browser
+    if (navigator.geolocation) {
+      // Get the user's current location
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+
+          // Update the map center and user location
+          setMapCenter({ lat: latitude, lng: longitude });
+          setUserLocation({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error("Error retrieving user location:", error);
+        }
+      );
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  };
 
   return (
     <div className="Dashboard-container">
       <div className="Dashboard-user-details">
         <div className="Dashboard-profile-box">
           <div className="Dashboard-profile-image">
-            <img
-              src={imgSrc}
-              alt="Profile"
-              className="Dashboard-circular-image"
-            />
+            <img src={imgSrc} alt="Profile" className="Dashboard-circular-image" />
           </div>
           <div className="Dashboard-user-info">
             <div className="Dashboard-full-name">
@@ -62,17 +94,60 @@ export default function Afterlogin(props) {
           <Flex position="relative" alignItems="center" h="100%">
             <Box w="100%" h="100%">
               <GoogleMap
-                center={center}
-                zoom={7}
+                center={mapCenter}
+                zoom={defaultMapOptions.zoom}
                 mapContainerStyle={{ width: "100%", height: "100%" }}
                 options={{
                   zoomControl: true,
-                  streetViewControl: false,
+                  streetViewControl: true,
                   mapTypeControl: true,
-                  fullscreenControl: false,
+                  fullscreenControl: true,
                 }}
               >
-                <Marker position={center} />
+                {userLocation && <Marker position={userLocation} />}
+                <Autocomplete
+                  onLoad={(autocomplete) => {
+                    searchBoxRef.current = autocomplete;
+                  }}
+                  onPlaceChanged={handlePlaceSelect}
+                >
+                  <input
+                    type="text"
+                    placeholder="Search places"
+                    style={{
+                      boxSizing: `border-box`,
+                      border: `1px solid transparent`,
+                      width: `240px`,
+                      height: `32px`,
+                      padding: `0 12px`,
+                      borderRadius: `3px`,
+                      boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                      fontSize: `14px`,
+                      outline: `none`,
+                      textOverflow: `ellipses`,
+                      position: "absolute",
+                      top: "10px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                    }}
+                  />
+                </Autocomplete>
+                <button
+                  onClick={handleLocate}
+                  style={{
+                    position: "absolute",
+                    bottom: "10px",
+                    left: "10px",
+                    zIndex: 1,
+                    background: "none",
+                    border: "none",
+                    color: "#666",
+                    cursor: "pointer",
+                    fontSize: "24px",
+                  }}
+                >
+                  <BiCurrentLocation />
+                </button>
               </GoogleMap>
             </Box>
           </Flex>
@@ -82,135 +157,14 @@ export default function Afterlogin(props) {
       <div className="trip-section">
         <div>
           <h2>Your Trips</h2> <button> + New Trip</button>
-          <Carousel1 />
+          <Card1 />
         </div>
 
         <div>
-          <h2>Upcomming trips</h2>
-          <Carousel1 />
+          <h2>Upcoming trips</h2>
+          <Card1 />
         </div>
       </div>
     </div>
   );
 }
-
-// import React, { useState, useEffect } from "react";
-// import Carousel1 from "./Carousel";
-// import "./afterlogin.css";
-// import { Box, Flex, SkeletonText } from "@chakra-ui/react";
-// import { useJsApiLoader, GoogleMap, Marker } from "@react-google-maps/api";
-// import axios from "axios";
-// import { useParams } from "react-router-dom";
-
-// export default function Afterlogin(props) {
-//   const [user, setUser] = useState("");
-//   const [username, setUsername] = useState("");
-//   const [profilePic, setProfilePic] = useState("");
-//   const center = { lat: 27.7172, lng: 85.324 };
-
-//   const { id } = useParams();
-//   const token = localStorage.getItem("accessToken");
-
-//   const headers = {
-//     Authorization: token,
-//     'Content-Type': 'application/json',
-//   };
-//   // fetching image andname from database
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get(
-//           `http://localhost:4000/user/userProfile/${id}`,
-//           { headers }
-//         );
-//         setUser(response.data.details);
-//         console.log("This is the data from the backend >>>>>>>", response.data);
-//       } catch (error) {
-//         console.error("Error fetching user data:", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, [id]);
-
-//   const { isLoaded } = useJsApiLoader({
-//     id: "google-map-script",
-//     googleMapsApiKey: "AIzaSyAOP6ZstiSFhfdwwvXy8c2dtWU7U8i-Q4Q",
-//     libraries: ["places"],
-//   });
-
-//   //const [map,setMap] = useState(/** @type google.maps.Map */ (null));
-
-//   if (!isLoaded) {
-//     return <SkeletonText />;
-//   }
-
-//   return (
-//     //for the profile pic
-//     // <div style={{ position: 'absolute', top: 0, left: 0, display: 'flex', alignItems: 'center', margin: '10px' }}>
-//     //     <div style={{ width: '50px', height: '50px', borderRadius: '50%', overflow: 'hidden', marginRight: '10px' }}>
-//     //       <img src={profilePic} alt="Profile" style={{ width: '100%', height: '100%' }} />
-//     //     </div>
-//     //     <div style={{ background: '#eee', borderRadius: '10px', padding: '10px' }}>
-//     //       <h2>username</h2>
-//     //     </div>
-//     //  </div>
-
-//     //for cards
-//     <>
-//       <div className="column4">
-//         <Flex
-//           position="relative"
-//           flexDirection="column"
-//           alignItems="center"
-//           h="100vh"
-//         >
-//           <Box position="absolute" left={600} top={0} h="100%" w="100%">
-//             <GoogleMap
-//               center={center}
-//               zoom={7}
-//               mapContainerStyle={{ width: "100%", height: "50%" }}
-//               options={{
-//                 zoomControl: true,
-//                 streetViewControl: false,
-//                 mapTypeControl: true,
-//                 fullscreenControl: false,
-//               }}
-//               // onLoad={(map) => setMap(map)}
-//             >
-//               <Marker position={center} />
-//             </GoogleMap>
-//           </Box>
-//         </Flex>
-//       </div>
-
-//       <div>
-//         <section>
-//           <div className="containe">
-//             <h1>Dashboard</h1>
-//             <div className="cards">
-//               <div className="card">
-//                 <h3>{user.name}</h3>
-//                 <p>
-//                   This part contains phto name by fetching from database.{" "}
-//                   <br></br>@{user.username}
-//                   <br></br>
-//                   {user.email}
-//                 </p>
-//                 <div className="imagecontainer">
-//                   {/* //add code to fetch from database */}
-//                 </div>
-//                 <button className="btn">Update Profile</button>
-//               </div>
-//             </div>
-//           </div>
-//         </section>
-//       </div>
-
-//       <div>
-//         <h1>POPULAR DESTINATIONS</h1>
-//         <Carousel1 />
-//       </div>
-//     </>
-//   );
-// }

@@ -9,6 +9,7 @@ function Card1() {
 
 
   const { id } = useParams();
+
   const {user} = UseFetch(`http://localhost:4000/plans/user/plan/${id}`)
   
   const num = user.planCount; // Assuming you have the `user` object with the `planCount` value
@@ -18,8 +19,10 @@ function Card1() {
   const cardArray = Array.from({ length: num });
 
   return (
-    <div className="container">
+    <div className="cards-container">
       <div className="row">
+      <div className="cards-card-scroll-container">
+      <div className="cards-card-stack">
         {/* Loop through the `cardArray` and generate cards */}
         {cardArray.map((_, index) => (
           <div className="col-md-3" key={index}>
@@ -32,6 +35,8 @@ function Card1() {
             </div>
           </div>
         ))}
+        </div>
+        </div>
       </div>
     </div>
   );

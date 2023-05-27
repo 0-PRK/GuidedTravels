@@ -1,28 +1,26 @@
-import Carousel from 'react-bootstrap/Carousel';
-import Card1 from "./cards";
+// import Carousel from 'react-bootstrap/Carousel';
+// import Card1 from "./cards";
+// import UseFetch from "../Hooks/UseFetch";
+// import { useParams } from "react-router-dom";
 
-function Carousel1() {
-  const numCards = 5; // Assuming you have the total number of cards
+// function Carousel1() {
+//   const { id } = useParams();
+//   const { user } = UseFetch(`http://localhost:4000/plans/user/plan/${id}`);
+//   const numCards = user ? user.planCount : 0;
 
-  // Calculate the number of Carousel items needed
-  const numItems = Math.ceil(numCards / 4);
+//   // Calculate the number of Carousel items needed
+//   const numItems = Math.ceil(numCards / 4);
 
-  // Create an array with `numItems` elements
-  const carouselItems = Array.from({ length: numItems });
+//   return (
+//     <Carousel>
+//       {/* Loop through the `user.plan` and generate Carousel items */}
+//       {user && user.plans.map((plan, index) => (
+//         <Carousel.Item key={index}>
+//           <Card1 plan={plan} />
+//         </Carousel.Item>
+//       ))}
+//     </Carousel>
+//   );
+// }
 
-  return (
-    <Carousel>
-      {/* Loop through the `carouselItems` and generate Carousel items */}
-      {carouselItems.map((_, index) => (
-        <Carousel.Item key={index}>
-          {/* Calculate the range of cards to be displayed in the current item */}
-          {Array.from({ length: 4 }).map((_, cardIndex) => (
-            <Card1 key={index * 4 + cardIndex} index={index * 4 + cardIndex} />
-          ))}
-        </Carousel.Item>
-      ))}
-    </Carousel>
-  );
-}
-
-export default Carousel1;
+// export default Carousel1;

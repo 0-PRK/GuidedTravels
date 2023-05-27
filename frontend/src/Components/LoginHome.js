@@ -362,6 +362,7 @@ export default function LoginHome(props) {
                     />
                   </p>
                 ))}
+                <div className="alignCenter">
                 <Button
                   colorScheme="purple"
                   type="submit"
@@ -369,6 +370,9 @@ export default function LoginHome(props) {
                 >
                   Submit
                 </Button>
+                <br/>
+                <br/>
+                </div>
               </Column>
             </Grid>
           </GridContainer>

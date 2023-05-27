@@ -128,7 +128,7 @@ const PlacesAutocomplete = ({ selected, setSelected }) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
     const diffInMilliseconds = Math.abs(end - start);
-    const days = Math.floor(diffInMilliseconds / (1000 * 60 * 60 * 24));
+    const days = Math.floor((diffInMilliseconds / (1000 * 60 * 60 * 24))+1);
     console.log(days);
     setResult(days);
     const tripDetail ={ 
@@ -144,7 +144,7 @@ const PlacesAutocomplete = ({ selected, setSelected }) => {
     console.log()
     if (value && days){ 
       navigate("/LoginHome");
-      dispatch(setItinerary(days))};
+      dispatch(setItinerary(days));};
   }
 
 

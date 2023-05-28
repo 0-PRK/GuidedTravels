@@ -10,9 +10,9 @@ import Upload from "./images/Upload-icon.png";
 import { useParams } from "react-router-dom";
 import img1 from "./images/navLogo.png";
 import { NavLink } from "react-router-dom";
-import UseFetch from "../Hooks/UseFetch";
 
 export default function Settings(props) {
+  const [user, setUser] = useState({});
   const [email, setEmail] = useState("");
   const [mod, setMod] = useState("false");
   // const [pass, setPass] = useState("");
@@ -21,11 +21,10 @@ export default function Settings(props) {
   const [pass, setPass] = useState("");
   // const [cpass, setcPass] = useState("");
   const [imgSrc, setImgSrc] = useState(img);
-  
+
   const navigate = useNavigate();
-  
+
   const { id } = useParams();
-  const {user} = UseFetch(`http://localhost:4000/user/userProfile/${id}`)
 
   const token = localStorage.getItem("accessToken");
 
@@ -33,6 +32,28 @@ export default function Settings(props) {
     Authorization: token,
     "Content-Type": "application/json",
   };
+
+  // fetching image and name from database
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/user/userProfile/${id}`,
+          { headers }
+        );
+        setUser(response.data.details);
+        console.log("This is the data from the backend >>>>>>>", response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+  const handleUnameChange = (e) => {
+    e.preventDefault()
+    setUname(e.target.value)
+  }
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0]; // Get the selected file
@@ -48,7 +69,7 @@ export default function Settings(props) {
       reader.readAsDataURL(file); // Read the file as data URL
     }
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     const values = {
@@ -58,11 +79,13 @@ export default function Settings(props) {
       password: pass,
       //confirmPassword: cpass,
     };
+  
+
 
     try {
       // Send the updated settings to the backend API
       const { data } = await axios.patch(
-        `http://localhost:4000/user/userProfile/:id}`,
+        `http://localhost:4000/user/userProfile/${id}`,
         values,
         { headers }
       );
@@ -70,7 +93,7 @@ export default function Settings(props) {
       if (data.error) {
         toast.error(data.error);
       } else {
-        toast.success("Settings Updated Successfully");
+        toast.success("Information Updated Successfully");
         navigate(`/Dashboard/${id}`);
       }
     } catch (error) {
@@ -86,10 +109,10 @@ export default function Settings(props) {
         className="pop1"
         contentClassName="pop1"
         size="lg"
-        
+
         isOpen={props.modal1}
         toggle={() => props.setmodal1(!props.modal1)}
-        
+
       >
         <ModalHeader>
           {" "}
@@ -154,7 +177,7 @@ export default function Settings(props) {
                 <NavLink
                   className="nav-link "
                   style={{ font: "Montserrat", fontSize: 30 }}
-                  to="/confirmPW"
+                  to={`/pw/${id}`}
                 >
                   Edit Password
                 </NavLink>
@@ -221,7 +244,7 @@ export default function Settings(props) {
                   Username
                 </label>
                 <input
-                  onChange={(e) => setUname(e.target.value)}
+                  onChange={handleUnameChange}
                   type="text"
                   id="Username"
                   className=" form-control"
@@ -242,8 +265,12 @@ export default function Settings(props) {
 
                 <br />
 
+
+
+                {/*<div className="quicksand200"><NavLink to="/plantrip"><button style={{width:"300px",height:"100px"}}type="button" class="btn btn-danger "><h1>+ PLAN TRIP</h1></button></NavLink></div>*/}
+
                 <button
-                  type="submit"
+                  type="button"
                   className="btn btn-success btn-lg"
                   onClick={() => props.setmodal1(true)}
                 >
@@ -289,5 +316,15 @@ export default function Settings(props) {
   );
 }
 
-//  export default Settings;
 
+
+
+
+
+
+
+
+
+
+
+//  export default Settings;

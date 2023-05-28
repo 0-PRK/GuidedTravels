@@ -72,25 +72,25 @@ module.exports.getPlanByUserId = async function getPlanByUserId(req, res) {
 
 
 
-module.exports.createPlan = async function createPlan(req, res) {
-  try {
-    let planData = req.body;
-    console.log(planData);
-    let createdPlan = await Plan.create(planData);
-    return res.json({
-      planId: createdPlan._id,
-      message: 'Plan created successfully',
-      data: createdPlan,
-    });
-  } catch (err) {
-    console.log('Error:', err.message);
-    return res.status(400).json({
-      message: err.message,
-    });
+module.exports.createPlan=async function createPlan(req,res){
+  try{
+      let planData=req.body;
+      console.log(planData);
+      let createPlan=await Plan.create(planData)
+      return res.json({
+          planId:createPlan.id,
+          message: 'plan created Succesfully',
+          data:createPlan
+      })
   }
-};
-
-
+  catch (err) {
+      console.log('Error : ', err.message)
+  
+      return res.status(400).json({
+        message: err.message,
+      });
+  }
+}
 // module.exports.deleteNote = async function deleteNote(req, res) {
 //   try {
 //     const planId = req.params.planId;

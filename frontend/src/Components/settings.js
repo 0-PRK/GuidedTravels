@@ -80,8 +80,6 @@ export default function Settings(props) {
       //confirmPassword: cpass,
     };
   
-
-
     try {
       // Send the updated settings to the backend API
       const { data } = await axios.patch(
@@ -102,6 +100,38 @@ export default function Settings(props) {
       toast.error(errorMessage);
     }
   };
+
+  const hsubmit = async (e) => {
+    e.preventDefault();
+    // const values = {
+    //   name,
+    //   username: uname,
+    //   email,
+    //   password: pass,
+    //   //confirmPassword: cpass,
+    // };
+  
+    try {
+      // Send the updated settings to the backend API
+      const { data } = await axios.delete(
+        `http://localhost:4000/user/userProfile/${id}`,
+                { headers }
+      );
+
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        toast.success("Information Updated Successfully");
+        navigate(`/Home`);
+      }
+    } catch (error) {
+      // Display error message received from the backend
+      const errorMessage = error.response.data.message;
+      toast.error(errorMessage);
+    }
+  };
+
+
 
   return (
     <>
@@ -184,14 +214,9 @@ export default function Settings(props) {
               </li>
 
               <li className="nav-item">
-                <NavLink
-                  className="nav-link"
-                  onClick={() => props.setmodal(true)}
-                  style={{ font: "Montserrat", fontSize: 30 }}
-                  to={`/Dashboard/settings/${id}`}
-                >
-                  Delete Account
-                </NavLink>
+              <button type="" className=" but btn btn-primary " onClick={hsubmit}>
+              Delete account
+            </button>
               </li>
             </ul>
           </div>
@@ -328,4 +353,3 @@ export default function Settings(props) {
 
 
 //  export default Settings;
-

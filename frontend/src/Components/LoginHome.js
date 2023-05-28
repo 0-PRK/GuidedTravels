@@ -175,7 +175,10 @@ export default function LoginHome(props) {
 
     // const url = "http://localhost:4000/plans/plan"; //backend API URL
     // const values = {
-    //   itinerary,user_id:userId
+    //   name:`${itinerary.location}`,
+    //   startDate:itinerary.startDate,
+    //   endDate:itinerary.endDate,
+    //   user_id:userId
     // };
     
     // const data=axios.post(url, values,{headers})

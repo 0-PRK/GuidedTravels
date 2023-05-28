@@ -16,14 +16,14 @@ module.exports.getUser = async function getUser(req, res) {
     }
 }
 
-// module.exports.postUsers=function postUser( req, res){
-//     console. log(req.body);
-//     users = req. body;
-//     res. json({
-//       message: "data received successfully",
-//       user: req.body,
-//     })
-// }
+module.exports.postUsers=function postUser( req, res){
+     console. log(req.body);
+     users = req. body;
+     res. json({
+       message: "data received successfully",
+       user: req.body,
+     })
+ }
 
 // module.exports.updateUsers=async function updateUser(req,res){
 //     // console. log(" req. body-> ", req.body);
@@ -91,44 +91,9 @@ module.exports.updateUsers = async function updateUser(req, res) {
 };
 
 
-//module.exports.updatepw = async function updatepw(req, res) {
-//     try {
-//         console.log("pw Called");
-//         const id = req.params.id;
-//         const user = await User.findById(id);
 
-//         if (user) {
-//             const { pass, cpass } = req.body;
-//             if(pass === cpass){
 
-//                 user.pass=pass;
-//         // const dataToBeUpdated = req.body;
-           
-//         //     for (const key in dataToBeUpdated) {
-//         //         if (dataToBeUpdated[key].length != 0 && dataToBeUpdated[key] != undefined) {
-//         //             user[key] = dataToBeUpdated[key];
-//         //         }
-//         //     }
-            
-//         //     // Save the updated user without running validations
-//             const updatedData = await user.save({ validateBeforeSave: false });
 
-//             res.json({
-//                 message: "pw updated successfully",
-//                 data: updatedData,
-//             });
-//         } else {
-//             res.json({
-//                 error: "pw not matched",
-//             });
-//         }
-//     }} catch (err) {
-//         console.log("Update error:", err);
-//         res.status(500).json({
-//             error: "An error occurred while updating the pw",
-//         });
-//     }
-// };
 module.exports.updatepw = async function updatepw(req, res) {
     try {
         console.log("pw Called");
@@ -167,6 +132,33 @@ module.exports.updatepw = async function updatepw(req, res) {
         });
     }
 };
+
+
+
+
+module.exports.deleteUsers = async function deleteUser(req, res) {
+    // users={}
+    try {
+        let id = req.params.id;
+        let user = await User.
+            findByIdAndDelete(id);
+        if (!user) {
+            res.json({
+                message: "user nor found"
+            })
+        }
+        res.json({
+            message: "data has been deleted",
+            data: user,
+        });
+    }
+
+    catch (err) {
+        res.json({
+            message: err.message
+        });
+    }
+}
 
 // module.exports.getAllUser=async function getAllUser( req, res){
 //     let users=await User.find();

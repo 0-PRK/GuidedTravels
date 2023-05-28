@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types"; //impt
 import logo from "./images/navLogo.png";
-import { NavLink} from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar(props) {
   // const location=useLocation()
@@ -11,7 +11,7 @@ export default function Navbar(props) {
       className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode} `}
     >
       <div className="container-fluid NewNavbarContent">
-        <NavLink className="navbar-brand" to={`/Dashboard/${userId}`}>
+        <NavLink className="navbar-brand" to="/Dashboard/:id">
           <img
             src={logo}
             alt="Logo"
@@ -77,10 +77,7 @@ export default function Navbar(props) {
                   <li>
                     <NavLink
                       to="/Home"
-                      onClick={() => {
-                        localStorage.removeItem("accessToken");
-                        localStorage.removeItem("userId");
-                      }}
+                      onClick={() => props.onFormSwitch("home")}
                       className="dropdown-item  "
                     >
                       Log Out

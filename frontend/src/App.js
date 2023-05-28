@@ -4,21 +4,26 @@ import React from "react";
 import "./App.css";
 import About from "./Components/About";
 import Navbar1 from "./Components/Navbar";
-// import Plan from "./Components/planTrip";
+import Plan from "./Components/planTrip";
 import Navbar2 from "./Components/afterLoginNavbar";
 import Home from "./Components/Home";
+import Carousel1 from "./Components/Carousel";
+//import ProfileScreen from "./Components/ProfileScreen";
 import Loginhome from "./Components/LoginHome";
-import HomeLOGIN from "./Components/afterlogin"
 import Settings from "./Components/settings";
 import ForgetPW from "./Components/forgetPW";
 import ConfirmPW from "./Components/ConfirmPW";
 import AddPlace from "./Components/addPlace";
+import DateCalculator from "./Components/planTrip";
 import PlanTrip from "./Components/planTrip";
 import NotFound from "./Components/NotFound";
 import Protected from "./PrivateRoute";
 
+// import LoginScreen from "./Components/LoginScreen";
 import { Toaster } from "react-hot-toast";
 import Afterlogin from "./Components/afterlogin";
+//import Carousel1 from "./Components/Carousel";
+// import axios from 'axios';
 
 import { Login } from "./Components/Login";
 import { Register } from "./Components/Register";
@@ -30,9 +35,36 @@ import {
   Navigate,
 } from "react-router-dom";
 
+// const PrivateRoute = ({ element: Element, ...rest }) => {
+//   const isAuthenticated = !!localStorage.getItem('accessToken');
+
+//   return (
+//     <Route
+//       {...rest}
+//       element={isAuthenticated ? <Element /> : <Navigate to="/login" />}
+//     />
+//   );
+// };
 
 function App() {
-  const token=localStorage.getItem("accessToken")
+  const apiKey = "AIzaSyDnqzvG0A1JmiMvayhbt_T_5IXtRO0DiHQ";
+  const [currentForm, setCurrentForm] = useState(
+    localStorage.getItem("accesstoken")
+      ? localStorage.getItem("accessToken")
+      : "home"
+  );
+
+  const toggleForm = (forName) => {
+    if (forName === "home") {
+      setCurrentForm("home");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userId");
+    } else {
+      setCurrentForm(forName);
+      localStorage.setItem("accessToken", forName);
+      // localStorage.setItem("userId", forName);
+    }
+  };
 
   const [result, setResult] = useState(null);
   const [modal, setmodal] = useState(false);
@@ -44,15 +76,19 @@ function App() {
       <div>
         <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />
         <Router>
-
-          {token===null ? (
+          {!localStorage.getItem("accessToken") &&
+          !localStorage.getItem("userId") ? (
             <Navbar1 mode="light" setmodal={setmodal} />
           ) : (
-            <Navbar2 mode="light"   />
+            <Navbar2
+              mode="light"
+              onFormSwitch={toggleForm}
+              
+            />
           )}
 
           <Routes>
-            {!token ? (
+            {localStorage.getItem("accessToken") ? (
               <Route
                 path="/"
                 element={<Home modal={modal} setmodal={setmodal} />}
@@ -60,7 +96,7 @@ function App() {
             ) : (
               <Route
                 path="/"
-                element={<HomeLOGIN modal={modal} setmodal={setmodal} />}
+                element={<Home modal={modal} setmodal={setmodal} />}
               />
             )}
 
@@ -94,11 +130,12 @@ function App() {
                 </Protected>
               }
             />
+            {/* </Route> */}
             <Route
               path="/Login"
               element={
                 <Login
-                 
+                  onFormSwitch={toggleForm}
                   modal={modal}
                   setmodal={setmodal}
                 />
@@ -108,14 +145,14 @@ function App() {
               path="/addPlace"
               element={<AddPlace data={data} setData={setData} />}
             />
-             <Route
+            <Route
               path="/plantrip"
               element={
                 <Protected>
-                  <PlanTrip data={data} setData={setData} />
+                  <Plan data={data} setData={setData} />
                 </Protected>
               }
-            /> 
+            />
 
             <Route
               path="/forgetPw"
@@ -123,7 +160,7 @@ function App() {
             />
 
             <Route
-              path="/resetpassword/:id"
+              path="/pw/:id"
               element={<ConfirmPW modal={modal} setmodal={setmodal} />}
             />
 
@@ -133,7 +170,9 @@ function App() {
             />
             <Route path="/About" element={<About />} />
 
+            <Route path="/PlanTrip" element={<PlanTrip />} />
 
+            {/* <Route path="/Dashboard/settings/:id" element={<PrivateRoute />}> */}
             <Route
               path="/Dashboard/settings/:id"
               element={
@@ -150,11 +189,27 @@ function App() {
                 </Protected>
               }
             />
+            {/* </Route> */}
 
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </div>
+
+      {/* <div>
+        <ProfileScreen/>
+      </div> */}
+
+      {/*<div>
+        <h1>POPULAR DESTINATIONSs</h1>
+        <Carousel1/>
+      </div>
+        <Afterlogin/> */}
+
+      {/* <div>
+        <h1>POPULAR DESTINATIONS</h1>
+        <Carousel1/>
+      </div> */}
     </>
   );
 }

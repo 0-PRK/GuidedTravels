@@ -148,7 +148,7 @@ export default function LoginHome(props) {
   const handleSubmit = async() => {
     try {
       const values = {
-        name:tripDetail.loaction,
+        name:`${tripDetail.loaction}`,
         user_id:userId,
         startDate:tripDetail.startDate,
         endDate:tripDetail.endDate,

@@ -15,12 +15,10 @@ const planSchema = new mongoose.Schema({
     required:false,
     ref:'Plan'
   },
-
   name: {
     type: String,
     required: true,
   },
-  
   imageUrl: {
     type: String,
     required: false,
@@ -75,7 +73,7 @@ const planSchema = new mongoose.Schema({
         placesitinerary: [
           new mongoose.Schema(
             {
-              name: { type: String, required: true,unique : true },
+              name: { type: String, required: true, unique: true },
               imageUrl: { type: String, required: false },
               notes: [
                 new mongoose.Schema(

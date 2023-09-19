@@ -148,7 +148,9 @@ module.exports.forgetpassword = async function forgetpassword(req, res) {
     const user = await User.findOne({ email: email });
     if (user) {
       const resetToken = user.createResetToken();
-      let resetPasswordLink = `localhost:3000/resetpassword/${resetToken}`; // //domain name for reset password link
+      let resetPasswordLink = `${req.protocal}://${req.get(
+        "host"
+      )}/resetpassword/${resetToken}`; // //domain name for reset password link
       //send email to user
       //nodemailer
       let obj = {
@@ -160,13 +162,13 @@ module.exports.forgetpassword = async function forgetpassword(req, res) {
         message: "mail sent",
       });
     } else {
-      return res.status(404).json({
-        error: "please signup",
+      return res.json({
+        message: "please signup",
       });
     }
   } catch (err) {
     res.status(404).json({
-      error: err.message,
+      message: err.message,
     });
   }
 };
@@ -174,7 +176,7 @@ module.exports.forgetpassword = async function forgetpassword(req, res) {
 //reset password
 module.exports.resetpassword = async function resetpassword(req, res) {
   try {
-    const token = req.body.id;
+    const token = req.parmas.token;
     let { password, confirmpassword } = req.body;
     const user = await User.findOne({ resetToken: token });
     if (user) {
@@ -185,12 +187,12 @@ module.exports.resetpassword = async function resetpassword(req, res) {
       });
     } else {
       res.json({
-        error: "Not a user",
+        message: "Not a user",
       });
     }
   } catch (err) {
     res.json({
-      error: err.message,
+      message: err.message,
     });
   }
 };

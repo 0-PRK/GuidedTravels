@@ -5,7 +5,7 @@ import Footer from "./footerAbout";
 export default function About() {
   return (
     <div className="aligncenter1">
-
+      <section id="about">
         <div className="quicksand18">
           <h1 style={{ fontSize: "100px" }}>ABOUT US</h1>
           <p>
@@ -83,13 +83,10 @@ export default function About() {
             </div>
           </div>
         </div>
-<hr/>
-<br/>
-<br/>
+      </section>
       <h1 className="quicksand20" style={{ marginTop: "0" }}>
-        <i>*Hope You Enjoy Your Journeys *</i>
+        <i>*Hope You Enjoy Your Journeys with GuidedTravels*</i>
       </h1>
-    
       <Footer />
     </div>
   );

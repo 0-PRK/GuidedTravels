@@ -142,7 +142,6 @@ module.exports.login = async function loginUser(req, res) {
 
 
 
-//forget password
 module.exports.forgetpassword = async function forgetpassword(req, res) {
   let { email } = req.body;
   try {

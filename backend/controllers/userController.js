@@ -131,10 +131,6 @@ module.exports.updatepw = async function updatepw(req, res) {
             error: "An error occurred while updating the pw",
         });
     }
-};
-
-
-
 
 module.exports.deleteUsers = async function deleteUser(req, res) {
     // users={}

@@ -59,6 +59,3 @@ module.exports.sendMail=async function sendMail(str,data) {
 
 catch(error){
   console.log(error);
-}
-
-

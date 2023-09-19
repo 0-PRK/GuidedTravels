@@ -147,14 +147,14 @@ export default function LoginHome(props) {
 
   const handleSubmit = async() => {
     try {
+      console.log(`${tripDetail.location}`);
       const values = {
-        name:tripDetail.loaction,
         user_id:userId,
+        name:`${tripDetail.location}`,
         startDate:tripDetail.startDate,
         endDate:tripDetail.endDate,
 
       };
-      console.log(tripDetail.location);
       const res = await axios.post("http://localhost:4000/plans/plan", values,{headers});
       console.log(values);
       if (res.error) {
@@ -175,10 +175,7 @@ export default function LoginHome(props) {
 
     // const url = "http://localhost:4000/plans/plan"; //backend API URL
     // const values = {
-    //   name:`${itinerary.location}`,
-    //   startDate:itinerary.startDate,
-    //   endDate:itinerary.endDate,
-    //   user_id:userId
+    //   itinerary,user_id:userId
     // };
     
     // const data=axios.post(url, values,{headers})
@@ -305,6 +302,7 @@ export default function LoginHome(props) {
                     <span className="visually-hidden">Next</span>
                   </button>
                 </div>
+
                 <div className="contact-short1">
                   <div className="d-grid gap-2 d-md-flex justify-content-md-center">
                     <h2>
@@ -325,7 +323,7 @@ export default function LoginHome(props) {
                   <p key={item}>
                     <AddPlace
                       data={item}
-                      index={index+1}
+                      index={index}
                       setlat1={setlat1}
                       setlng1={setlat1}
                     />
@@ -365,7 +363,7 @@ export default function LoginHome(props) {
                 }}
                 onLoad={(map) => setMap(map)}
               >
-                <Marker position={center} />
+                {<Marker position={center} />}
                 {directionsResponse && (
                   <DirectionsRenderer directions={directionsResponse} />
                 )}

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 // import { PropTypes } from "prop-types";
 import { toast } from "react-hot-toast";
+import { Container } from "@mui/material";
 import { Modal, ModalHeader } from "reactstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -11,29 +12,36 @@ import { NavLink } from "react-router-dom";
 import img1 from "./images/navLogo.png";
 
 export default function ForgetPW(props) {
-  const history = useNavigate();
+//   const history = useNavigate();
 
   const [email, setEmail] = useState("");
 
 
 
-  async function Submit(e) {
-    e.preventDefault();
-    try {
-      console.log(email);
-      const res = await axios.post("http://localhost:4000/user/forgetpassword", { email }); // Pass email as an object or use { email: email }
-      console.log(res);
-      if (res.data.error) {
-        toast.error(res.data.error); // Update the error access to res.data.error
-      } else {
-        toast.success("Mail sent successfully. Please check your mail");
-        history('/home');
-      }
-    } catch (err) {
-      toast.error("Error");
-      console.log(err);
-    }
-  }
+//   async function Submit(e) {
+//     e.preventDefault();
+//     try {
+//       console.log(email);
+//       const values = {
+//         email,
+
+//       };
+//       console.log(values);
+//       const res = await axios.post("http://localhost:4000/user/login", values);
+//       if (res.error) {
+//         toast.error(res.error);
+//       } else {
+//         props.onFormSwitch(res.data.accessToken);
+//         localStorage.setItem("userId", res.data.user_id);
+//         toast.success("Logged in successfully");
+//         const userId = localStorage.getItem("userId");
+//         history(`/Dashboard/${userId}`);
+//       }
+//     } catch (err) {
+//       toast.error("error");
+//       console.log(err);
+//     }
+//   }
 
 
   return (
@@ -66,7 +74,7 @@ export default function ForgetPW(props) {
           <form
             action="POST"
             className="login-form"
-            onSubmit={Submit}
+            // onSubmit={Submit}
             novalidate
           >
             <label htmlFor="email" className="form-label"></label>
@@ -84,9 +92,13 @@ export default function ForgetPW(props) {
 
             <br />
             <div className="text-center">
+            <NavLink
+            to="/confirmPW"
+          >
               <button type="submit" className=" but btn btn-primary  ">
                 <h5>Submit</h5>
               </button>
+              </NavLink>
             </div>
           </form>
         </Modal>

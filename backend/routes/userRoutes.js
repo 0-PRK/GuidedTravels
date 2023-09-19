@@ -38,7 +38,7 @@ userRouter.route("/signup").post(signup);  //done
 
 userRouter.route("/forgetpassword").post(forgetpassword);
 
-userRouter.route("/resetpassword/:token").patch(resetpassword);
+userRouter.route("/resetpassword/:token").post(resetpassword);
 
 userRouter.route("/login").post(login);  //done
 
@@ -55,7 +55,6 @@ userRouter.route("/userProfile/:id")
 .patch(updateUsers)   //done
 .delete(deleteUsers)//done
 .get(getUser);
-
 
 userRouter.route("/userProfile/pw/:id")
 .patch(updatepw)
